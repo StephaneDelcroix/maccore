@@ -2282,7 +2282,10 @@ public class Generator {
 		"System.Runtime.InteropServices",
 		"System.Diagnostics",
 		"System.ComponentModel",
+#if !MONOMAC
 		"System.Threading.Tasks",
+#endif
+
 #if MONOMAC
 		"MonoMac",
 		"MonoMac.CoreFoundation",
@@ -3344,9 +3347,10 @@ public class Generator {
 			print ("}\n");
 		}
 
+#if !MONOMAC
 		if (mi.IsDefined (typeof (AsyncAttribute), false))
 			GenerateAsyncMethod (type, mi, category_extension_type);
-
+#endif
 	}
 	
 	public string GetGeneratedTypeName (Type type)
